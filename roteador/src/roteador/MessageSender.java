@@ -27,7 +27,7 @@ public class MessageSender implements Runnable{
         
         /* Cria socket para envio de mensagem */
         try {
-            clientSocket = new DatagramSocket(4000);
+            clientSocket = new DatagramSocket(Integer.valueOf(vizinhos.get(0).port)-1000);
         } catch (SocketException ex) {
             Logger.getLogger(MessageSender.class.getName()).log(Level.SEVERE, null, ex);
             return;
@@ -42,17 +42,17 @@ public class MessageSender implements Runnable{
             sendData = tabela_string.getBytes();
             
             /* Anuncia a tabela de roteamento para cada um dos vizinhos */
-            for (String ip : vizinhos){
+            for (IpWithPort ipWithAddress : vizinhos){
                 /* Converte string com o IP do vizinho para formato InetAddress */
                 try {
-                    IPAddress = InetAddress.getByName(ip);
+                    IPAddress = InetAddress.getByName(ipWithAddress.ip);
                 } catch (UnknownHostException ex) {
                     Logger.getLogger(MessageSender.class.getName()).log(Level.SEVERE, null, ex);
                     continue;
                 }
                 
                 /* Configura pacote para envio da menssagem para o roteador vizinho na porta 5000*/
-                DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 5000);         
+                DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, Integer.valueOf(ipWithAddress.port));         
                 
                 /* Realiza envio da mensagem. */
                 try {

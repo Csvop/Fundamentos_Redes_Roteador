@@ -5,14 +5,17 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MessageReceiver implements Runnable{
     private TabelaRoteamento tabela;
-    
-    public MessageReceiver(TabelaRoteamento t){
+    private ArrayList<IpWithPort> vizinhos;
+
+    public MessageReceiver(TabelaRoteamento t, ArrayList<IpWithPort> v){
         tabela = t;
+        vizinhos = v;
     }
     
     @Override
@@ -20,9 +23,8 @@ public class MessageReceiver implements Runnable{
         DatagramSocket serverSocket = null;
         
         try {
-            
             /* Inicializa o servidor para aguardar datagramas na porta 5000 */
-            serverSocket = new DatagramSocket(5000);
+            serverSocket = new DatagramSocket(Integer.parseInt(vizinhos.get(0).port));
         } catch (SocketException ex) {
             Logger.getLogger(MessageReceiver.class.getName()).log(Level.SEVERE, null, ex);
             return;
