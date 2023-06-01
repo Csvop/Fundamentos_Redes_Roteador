@@ -12,9 +12,9 @@ import java.util.logging.Logger;
 
 public class MessageSender implements Runnable{
     TabelaRoteamento tabela; /*Tabela de roteamento */
-    ArrayList<IpWithPort> vizinhos; /* Lista de IPs dos roteadores vizinhos */
+    ArrayList<String> vizinhos; /* Lista de IPs dos roteadores vizinhos */
     
-    public MessageSender(TabelaRoteamento t, ArrayList<IpWithPort> v){
+    public MessageSender(TabelaRoteamento t, ArrayList<String> v){
         tabela = t;
         vizinhos = v;
     }
@@ -27,7 +27,7 @@ public class MessageSender implements Runnable{
         
         /* Cria socket para envio de mensagem */
         try {
-            clientSocket = new DatagramSocket(4000);
+            clientSocket = new DatagramSocket();
         } catch (SocketException ex) {
             Logger.getLogger(MessageSender.class.getName()).log(Level.SEVERE, null, ex);
             return;

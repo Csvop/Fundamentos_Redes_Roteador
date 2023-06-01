@@ -12,15 +12,14 @@ public class Roteador {
 
     public static void main(String[] args) throws IOException {
         /* Lista de endereço IPs dos vizinhos */
-        ArrayList<IpWithPort> ip_list = new ArrayList<>();
+        ArrayList<String> ip_list = new ArrayList<>();
 
         /* Le arquivo de entrada com lista de IPs dos roteadores vizinhos. */
-        try ( BufferedReader inputFile = new BufferedReader(new FileReader("ipVizinhos.txt"))) {
-            String ipAndPort;
+        try ( BufferedReader inputFile = new BufferedReader(new FileReader("IPVizinhos.txt"))) {
+            String ip;
             
-            while( (ipAndPort = inputFile.readLine()) != null){
-                String[] ipWithPort = ipAndPort.split(":");
-                ip_list.add(new IpWithPort(ipWithPort[0], ipWithPort[1]));
+            while( (ip = inputFile.readLine()) != null){
+                ip_list.add(ip);
             }
             
         } catch (FileNotFoundException ex) {
