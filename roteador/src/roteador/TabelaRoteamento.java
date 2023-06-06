@@ -25,11 +25,19 @@ public class TabelaRoteamento {
         // Limpa caracteres UTF8
         tabela_s = tabela_s.replaceAll("[^\\x00-\\x7F]", "");
 
+        // Limpa caracteres de nova linha
+        tabela_s = tabela_s.replaceAll("[\\n\\r]", "");
+
+        // Limpa caracteres de espaço
+        tabela_s = tabela_s.replaceAll("\\s+", "");
+
         if(tabela_s.equals("!")) {
             return;
         }
 
         String[] tabela = tabela_s.split("\\*");
+
+        System.out.println(tabela_s);
 
         for (String ipAndMetric : tabela) {
             String[] ipAndMetricArray = ipAndMetric.split(";");
