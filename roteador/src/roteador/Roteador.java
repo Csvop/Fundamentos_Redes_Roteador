@@ -35,6 +35,8 @@ public class Roteador {
         sender.start();
         receiver.start();
         
+        // a cada 20 segundos, printar as informações da tabela de roteamento
+        
     }
     
 }

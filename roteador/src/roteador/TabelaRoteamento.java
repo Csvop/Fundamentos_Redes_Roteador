@@ -21,23 +21,19 @@ public class TabelaRoteamento {
 
     /* Atualize a tabela de rotamento a partir da string recebida. */
     // System.out.println( IPAddress.getHostAddress() + ": " + tabela_s);
-    public void update_tabela(String tabela_s, InetAddress IPAddress) {
-        // Limpa caracteres UTF8
-        tabela_s = tabela_s.replaceAll("[^\\x00-\\x7F]", "");
+    public void update_tabela(String tabela_s, InetAddress IPAddress) {        
+        tabela_s = tabela_s.trim();
 
-        // Limpa caracteres de nova linha
-        tabela_s = tabela_s.replaceAll("[\\n\\r]", "");
-
-        // Limpa caracteres de espaço
-        tabela_s = tabela_s.replaceAll("\\s+", "");
+        System.out.println("emcimadoif: " + tabela_s);
 
         if(tabela_s.equals("!")) {
+            System.out.println("Tabela vazia");
             return;
         }
 
         String[] tabela = tabela_s.split("\\*");
 
-        System.out.println(tabela_s);
+        System.out.println("tabela_s: " + tabela_s);
 
         for (String ipAndMetric : tabela) {
             String[] ipAndMetricArray = ipAndMetric.split(";");
@@ -57,6 +53,17 @@ public class TabelaRoteamento {
                 ips_saida.add(IPAddress.getHostAddress());
             }
         }
+
+        /*/
+        // se houver um destino no ip_destino que nao estiver na tabela_s, remove
+        for (int i = 0; i < ips_destino.size(); i++) {
+            if (!tabela_s.contains(ips_destino.get(i))) {
+                ips_destino.remove(i);
+                metricas.remove(i);
+                ips_saida.remove(i);
+            }
+        }
+        */
     }
 
     public String get_tabela_string() {
