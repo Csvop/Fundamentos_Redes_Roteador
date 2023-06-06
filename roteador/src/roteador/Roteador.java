@@ -29,14 +29,19 @@ public class Roteador {
         
         /* Cria instâncias da tabela de roteamento e das threads de envio e recebimento de mensagens. */
         TabelaRoteamento tabela = new TabelaRoteamento();
+        //tabela.update_tabela("*255.255.255.255", null);
+        tabela.ips_destino.add("255.255.255.255");
+        tabela.metricas.add(1);
+        tabela.ips_saida.add("144.144.144.144");
+
         Thread sender = new Thread(new MessageReceiver(tabela));
         Thread receiver = new Thread(new MessageSender(tabela, ip_list));
         
         sender.start();
         receiver.start();
         
-        // a cada 20 segundos, printar as informações da tabela de roteamento
         
+
     }
     
 }

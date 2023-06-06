@@ -24,8 +24,6 @@ public class TabelaRoteamento {
     public void update_tabela(String tabela_s, InetAddress IPAddress) {        
         tabela_s = tabela_s.trim();
 
-        System.out.println("emcimadoif: " + tabela_s);
-
         if(tabela_s.equals("!")) {
             System.out.println("Tabela vazia");
             return;
@@ -33,9 +31,14 @@ public class TabelaRoteamento {
 
         String[] tabela = tabela_s.split("\\*");
 
-        System.out.println("tabela_s: " + tabela_s);
+        // Remove o primeiro elemento do array, pois ele é vazio
+        String[] tabela_aux = new String[tabela.length - 1];
 
-        for (String ipAndMetric : tabela) {
+        for (int i = 1; i < tabela.length; i++) {
+            tabela_aux[i - 1] = tabela[i];
+        }
+
+        for (String ipAndMetric : tabela_aux) {
             String[] ipAndMetricArray = ipAndMetric.split(";");
             String ip = ipAndMetricArray[0];
             Integer metric = Integer.parseInt(ipAndMetricArray[1]);
@@ -54,7 +57,7 @@ public class TabelaRoteamento {
             }
         }
 
-        /*/
+        
         // se houver um destino no ip_destino que nao estiver na tabela_s, remove
         for (int i = 0; i < ips_destino.size(); i++) {
             if (!tabela_s.contains(ips_destino.get(i))) {
@@ -63,7 +66,7 @@ public class TabelaRoteamento {
                 ips_saida.remove(i);
             }
         }
-        */
+        
     }
 
     public String get_tabela_string() {
@@ -76,10 +79,12 @@ public class TabelaRoteamento {
              * Converta a tabela de rotamento para string, conforme formato definido no
              * protocolo .
              */
+            
             for (int i = 0; i < ips_destino.size(); i++) {
                 tabela_string += "*" + ips_destino.get(i) + ";" + metricas.get(i);
             }
         }
+        System.out.println("\nTabela: " + tabela_string);
 
         return tabela_string;
     }

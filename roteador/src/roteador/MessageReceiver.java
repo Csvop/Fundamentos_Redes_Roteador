@@ -49,7 +49,7 @@ public class MessageReceiver implements Runnable{
             /* Obtem o IP de origem da mensagem */
             InetAddress IPAddress = receivePacket.getAddress();
             
-            System.out.println("IP: " + IPAddress + "\nTabela Info: " + tabela_string);
+            System.out.println("\nIP: " + IPAddress + "\nTabela Info: " + tabela_string);
             
             tabela.update_tabela(tabela_string, IPAddress);
         }
