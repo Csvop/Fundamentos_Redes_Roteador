@@ -84,7 +84,6 @@ public class TabelaRoteamento {
                 tabela_string += "*" + ips_destino.get(i) + ";" + metricas.get(i);
             }
         }
-        System.out.println("\nTabela: " + tabela_string);
 
         return tabela_string;
     }

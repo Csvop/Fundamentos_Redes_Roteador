@@ -29,10 +29,10 @@ public class Roteador {
         
         /* Cria instâncias da tabela de roteamento e das threads de envio e recebimento de mensagens. */
         TabelaRoteamento tabela = new TabelaRoteamento();
-        //tabela.update_tabela("*255.255.255.255", null);
-        tabela.ips_destino.add("255.255.255.255");
+
+        tabela.ips_destino.add("10.32.162.207");
         tabela.metricas.add(1);
-        tabela.ips_saida.add("144.144.144.144");
+        tabela.ips_saida.add("10.32.162.168");
 
         Thread sender = new Thread(new MessageReceiver(tabela));
         Thread receiver = new Thread(new MessageSender(tabela, ip_list));
@@ -41,6 +41,18 @@ public class Roteador {
         receiver.start();
         
         
+        while(true){
+            try {
+                System.out.println("\nMinha Tabela:");
+                System.out.println("IP Destino     |     Métrica     |      IP Saída");
+                for(int i = 0; i < tabela.ips_destino.size(); i++){
+                    System.out.println(tabela.ips_destino.get(i) + "           " + tabela.metricas.get(i) + "           " + tabela.ips_saida.get(i));
+                }
+                Thread.sleep(15000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(MessageSender.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
     }
     
