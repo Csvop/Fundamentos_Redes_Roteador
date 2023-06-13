@@ -43,7 +43,7 @@ public class TabelaRoteamento {
             String ip = ipAndMetricArray[0];
             Integer metric = Integer.parseInt(ipAndMetricArray[1]);
 
-            if (ip.equals("10.32.162.159")) {
+            if (ip.equals("10.32.162.142")) {
                 continue;
             }
 
