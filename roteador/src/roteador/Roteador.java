@@ -48,13 +48,9 @@ public class Roteador {
                 System.out.println("\nMinha Tabela:");
                 System.out.println("IP Destino     |     Métrica     |      IP Saída");
                 for(int i = 0; i < tabela.ips_destino.size(); i++){
-                    if(tabela.ips_destino.get(i).equals("10.32.162.159")){
-                        System.out.println(tabela.ips_destino.get(i) + "           " + "0" + "           " + tabela.ips_destino.get(i));
-                    }
-                    else{
-
-                        System.out.println(tabela.ips_destino.get(i) + "           " + tabela.metricas.get(i) + "           " + tabela.ips_saida.get(i));
-                    }
+                    
+                    System.out.println(tabela.ips_destino.get(i) + "           " + tabela.metricas.get(i) + "           " + tabela.ips_saida.get(i));
+                    
                 }
                 Thread.sleep(15000);
             } catch (InterruptedException ex) {

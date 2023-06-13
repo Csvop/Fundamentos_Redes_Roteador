@@ -21,10 +21,10 @@ public class TabelaRoteamento {
 
     /* Atualize a tabela de rotamento a partir da string recebida. */
     // System.out.println( IPAddress.getHostAddress() + ": " + tabela_s);
-    public void update_tabela(String tabela_s, InetAddress IPAddress) {        
+    public void update_tabela(String tabela_s, InetAddress IPAddress) {
         tabela_s = tabela_s.trim();
 
-        if(tabela_s.equals("!")) {
+        if (tabela_s.equals("!")) {
             System.out.println("Tabela recebida vazia");
             return;
         }
@@ -43,30 +43,34 @@ public class TabelaRoteamento {
             String ip = ipAndMetricArray[0];
             Integer metric = Integer.parseInt(ipAndMetricArray[1]);
 
+            if (ip.equals("10.32.162.159")) {
+                continue;
+            }
+
             if (ips_destino.contains(ip)) {
                 int index = ips_destino.indexOf(ip);
                 if (metricas.get(index) > metric) {
                     ips_destino.set(index, ip);
-                    metricas.set(index, metric+1);
+                    metricas.set(index, metric + 1);
                     ips_saida.set(index, IPAddress.getHostAddress());
                 }
             } else {
                 ips_destino.add(ip);
-                metricas.add(metric+1);
+                metricas.add(metric + 1);
                 ips_saida.add(IPAddress.getHostAddress());
             }
         }
 
         /*
-        // se houver um destino no ip_destino que nao estiver na tabela_s, remove
-        for (int i = 0; i < ips_destino.size(); i++) {
-            if (!tabela_s.contains(ips_destino.get(i))) {
-                ips_destino.remove(i);
-                metricas.remove(i);
-                ips_saida.remove(i);
-            }
-        }
-        */
+         * // se houver um destino no ip_destino que nao estiver na tabela_s, remove
+         * for (int i = 0; i < ips_destino.size(); i++) {
+         * if (!tabela_s.contains(ips_destino.get(i))) {
+         * ips_destino.remove(i);
+         * metricas.remove(i);
+         * ips_saida.remove(i);
+         * }
+         * }
+         */
     }
 
     public String get_tabela_string() {
@@ -79,7 +83,7 @@ public class TabelaRoteamento {
              * Converta a tabela de rotamento para string, conforme formato definido no
              * protocolo .
              */
-            
+
             for (int i = 0; i < ips_destino.size(); i++) {
                 tabela_string += "*" + ips_destino.get(i) + ";" + metricas.get(i);
             }
