@@ -30,9 +30,11 @@ public class Roteador {
         /* Cria instâncias da tabela de roteamento e das threads de envio e recebimento de mensagens. */
         TabelaRoteamento tabela = new TabelaRoteamento();
 
-        tabela.ips_destino.add("10.32.160.138");
-        tabela.metricas.add(1);
-        tabela.ips_saida.add("10.32.162.168");
+        for (String ipVizinho : ip_list) { // adiciona os vizinhos na tabela
+            tabela.ips_destino.add(ipVizinho);
+            tabela.metricas.add(1);
+            tabela.ips_saida.add(ipVizinho);
+        }
 
         Thread sender = new Thread(new MessageReceiver(tabela));
         Thread receiver = new Thread(new MessageSender(tabela, ip_list));
@@ -41,7 +43,7 @@ public class Roteador {
         receiver.start();
         
         
-        while(true){
+        while(true){ // a cada 15 segundos imprime a tabela de roteamento
             try {
                 System.out.println("\nMinha Tabela:");
                 System.out.println("IP Destino     |     Métrica     |      IP Saída");

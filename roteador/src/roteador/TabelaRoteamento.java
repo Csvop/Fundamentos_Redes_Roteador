@@ -25,7 +25,7 @@ public class TabelaRoteamento {
         tabela_s = tabela_s.trim();
 
         if(tabela_s.equals("!")) {
-            System.out.println("Tabela vazia");
+            System.out.println("Tabela recebida vazia");
             return;
         }
 
@@ -57,7 +57,7 @@ public class TabelaRoteamento {
             }
         }
 
-        
+        /*
         // se houver um destino no ip_destino que nao estiver na tabela_s, remove
         for (int i = 0; i < ips_destino.size(); i++) {
             if (!tabela_s.contains(ips_destino.get(i))) {
@@ -66,7 +66,7 @@ public class TabelaRoteamento {
                 ips_saida.remove(i);
             }
         }
-        
+        */
     }
 
     public String get_tabela_string() {
