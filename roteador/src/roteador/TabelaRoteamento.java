@@ -45,7 +45,7 @@ public class TabelaRoteamento {
 
             if (ips_destino.contains(ip)) {
                 int index = ips_destino.indexOf(ip);
-                if (metricas.get(index) <= metric) {
+                if (metricas.get(index) > metric) {
                     ips_destino.set(index, ip);
                     metricas.set(index, metric+1);
                     ips_saida.set(index, IPAddress.getHostAddress());
