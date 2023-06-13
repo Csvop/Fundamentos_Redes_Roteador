@@ -30,7 +30,7 @@ public class Roteador {
         /* Cria instâncias da tabela de roteamento e das threads de envio e recebimento de mensagens. */
         TabelaRoteamento tabela = new TabelaRoteamento();
 
-        tabela.ips_destino.add("10.32.162.207");
+        tabela.ips_destino.add("10.32.160.138");
         tabela.metricas.add(1);
         tabela.ips_saida.add("10.32.162.168");
 
