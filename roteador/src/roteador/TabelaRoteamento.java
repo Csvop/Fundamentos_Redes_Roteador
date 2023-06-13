@@ -47,12 +47,12 @@ public class TabelaRoteamento {
                 int index = ips_destino.indexOf(ip);
                 if (metricas.get(index) <= metric) {
                     ips_destino.set(index, ip);
-                    metricas.set(index, metric);
+                    metricas.set(index, metric+1);
                     ips_saida.set(index, IPAddress.getHostAddress());
                 }
             } else {
                 ips_destino.add(ip);
-                metricas.add(metric);
+                metricas.add(metric+1);
                 ips_saida.add(IPAddress.getHostAddress());
             }
         }
