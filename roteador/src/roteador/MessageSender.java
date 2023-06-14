@@ -34,7 +34,14 @@ public class MessageSender implements Runnable {
             return;
         }
 
+        int i = 0;
         while (true) {
+            // INICIA A TABELA ANTIGA
+            if (i == 0) {
+                tabela_antiga = tabela;
+                i++;
+            }
+
             /*
              * Pega a tabela de roteamento no formato string, conforme especificado pelo
              * protocolo.
